@@ -1,0 +1,35 @@
+{
+  "name": "customer_order_status",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "server": "nodemon index.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "Ashish",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bottleneck": "^2.19.5",
+    "colors": "^1.4.0",
+    "concurrently": "^5.3.0",
+    "cors": "^2.8.5",
+    "csvtojson": "^2.0.10",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.27",
+    "multer": "^1.4.2",
+    "node-cron": "^2.0.3",
+    "nodemon": "^2.0.4",
+    "nonce": "^1.0.4",
+    "qs": "^6.9.4",
+    "querystring": "^0.2.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
+    "shopify-api-node": "^3.4.3"
+  }
+}
