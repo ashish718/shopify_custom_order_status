@@ -4,7 +4,7 @@
 // let {saveFailedOrders, getFailedOrders} = require('../service/OrderDataMapping')
 // let {orderTrigger} = require('../utils/FailedOrdersTrigger')
 // let {findMappedDataByVId} = require('../service/saveMappedData')
-let {saveOrders} = require('../utils/orderWebhook')
+let {saveOrders} = require('../utils/webhookOrdersList')
 
 exports.CreateOrder = async (request, response) =>{
 
