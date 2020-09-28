@@ -5,6 +5,7 @@
 // let {orderTrigger} = require('../utils/FailedOrdersTrigger')
 // let {findMappedDataByVId} = require('../service/saveMappedData')
 let {saveOrders} = require('../utils/webhookOrdersList')
+let orderSchema = require('../model/orderSchema')
 
 exports.CreateOrder = async (request, response) =>{
 
@@ -52,5 +53,21 @@ exports.CreateOrder = async (request, response) =>{
 
    }
 
+
+}
+
+
+
+
+exports.showOrders = async(req, res)=>{
+  await orderSchema.find({shop: req.params.shop}, function(err, docs){
+    if (err) {
+      res.send(err)
+
+    }
+    else {
+      res.send(docs)
+    }
+  })
 
 }

@@ -3,5 +3,5 @@ let WebhookController = require('../controller/WebhookController')
 
 
 router.post('/store/:shop/:topic/:subtopic', WebhookController.CreateOrder)
-
+router.get('/record/:shop', WebhookController.showOrders)
 module.exports = router

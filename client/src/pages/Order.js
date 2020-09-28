@@ -84,7 +84,7 @@ export default function Cresentials() {
 
 	const orderFailed = async () => {
 		try {
-			let res = await axios.get(`/order/trigger/failed/${shop}`);
+			let res = await axios.get(`/order/record/${shop}`);
 			console.log(res);
 
 			if (res) {
@@ -123,10 +123,17 @@ export default function Cresentials() {
 									{data &&
 										data.map((order) => (
 											<tr>
-												<td data-column="First Name">{order.created_on}</td>
-												<td data-column="Last Name">{order.orderId}</td>
-												<td data-column="Job Title">{order.customer}</td>
-												<td data-column="Twitter">{order.amountPaid}</td>
+												<td data-column="First Name">{order.order.name}</td>
+												<td data-column="Last Name">{order.order.created_at}</td>
+												<td data-column="Job Title">{order.order.customer.first_name} {order.order.customer.last_name}</td>
+												<td data-column="Twitter">{order.line_items[0].title}</td>
+												<td data-column="Twitter">
+														<select value="Radish">
+															<option value="Orange">Orange</option>
+															<option value="Radish">Radish</option>
+															<option value="Cherry">Cherry</option>
+														</select>
+												</td>
 											</tr>
 										))}
 								</tbody>
