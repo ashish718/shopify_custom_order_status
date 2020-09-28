@@ -68,8 +68,9 @@ export default function Cresentials() {
 	// }, []);
 
 	const getData = async () => {
-		if (shop && shop.length > 10) {
-			const data = await axios.get(`/order/record/${shop}`);
+		// if (shop && shop.length > 10) {
+			// const data = await axios.get(`/order/record/${shop}`);
+			const data = await axios.get(`/order/record/demo-mojito.myshopify.com`);
 			if (data.data.length>0) {
 				if (Array.isArray(data.data)) {
 					setData(data.data);
@@ -79,7 +80,7 @@ export default function Cresentials() {
 			else {
 				setData([])
 			}
-		}
+		//}
 	};
 
 	const orderFailed = async () => {
@@ -106,17 +107,17 @@ export default function Cresentials() {
 				<Layout>
 					{data.length > 0 ? (
 						<Card sectioned>
-							<Button primary onClick={orderFailed}>
-								Trigger failed orders
-							</Button>
+						
 
 							<table>
 								<thead>
 									<tr>
-										<th>Created On</th>
+
 										<th>Order Id</th>
-										<th>Customer</th>
-										<th>Amount Paid</th>
+										<th>Created at</th>
+										<th>Customer Name</th>
+										<th>Order items</th>
+										<th>Status</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -125,13 +126,20 @@ export default function Cresentials() {
 											<tr>
 												<td data-column="First Name">{order.order.name}</td>
 												<td data-column="Last Name">{order.order.created_at}</td>
-												<td data-column="Job Title">{order.order.customer.first_name}+' '+{order.order.customer.last_name}</td>
-												<td data-column="Twitter">{order.order.line_items[0].title}</td>
+												<td data-column="Job Title">{order.order.customer.first_name} {order.order.customer.last_name}</td>
 												<td data-column="Twitter">
-														<select value="Radish">
-															<option value="Orange">Orange</option>
-															<option value="Radish">Radish</option>
-															<option value="Cherry">Cherry</option>
+												{order.order.line_items.map((item, i) =>
+													 (
+													<li style={{}}>{item.name}</li>
+												))
+												}
+												</td>
+												<td data-column="Twitter">
+														<select value="Change">
+															<option value="Orange">Change Status</option>
+															<option value="Orange">Status 1</option>
+															<option value="Radish">Status 2</option>
+															<option value="Cherry">Status 3</option>
 														</select>
 												</td>
 											</tr>
