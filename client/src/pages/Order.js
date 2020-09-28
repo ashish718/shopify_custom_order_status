@@ -125,8 +125,8 @@ export default function Cresentials() {
 											<tr>
 												<td data-column="First Name">{order.order.name}</td>
 												<td data-column="Last Name">{order.order.created_at}</td>
-												<td data-column="Job Title">{order.order.customer.first_name} {order.order.customer.last_name}</td>
-												<td data-column="Twitter">{order.line_items[0].title}</td>
+												<td data-column="Job Title">{order.order.customer.first_name}+' '+{order.order.customer.last_name}</td>
+												<td data-column="Twitter">{order.order.line_items[0].title}</td>
 												<td data-column="Twitter">
 														<select value="Radish">
 															<option value="Orange">Orange</option>
