@@ -70,6 +70,7 @@ export default function Cresentials() {
 	const getData = async () => {
 		if (shop && shop.length > 10) {
 			const data = await axios.get(`/order/failed/${shop}`);
+			console.log(data, "data is");
 			if (data.length>0) {
 				if (Array.isArray(data)) {
 					setData(data);
