@@ -4,6 +4,7 @@
 // let {saveFailedOrders, getFailedOrders} = require('../service/OrderDataMapping')
 // let {orderTrigger} = require('../utils/FailedOrdersTrigger')
 // let {findMappedDataByVId} = require('../service/saveMappedData')
+let {saveOrders} = require('../utils/orderWebhook')
 
 exports.CreateOrder = async (request, response) =>{
 
@@ -17,6 +18,9 @@ exports.CreateOrder = async (request, response) =>{
    try {
      if (topic==='orders/create') {
        console.log(request.body, "order create request body");
+       let savingToDb = await saveOrders(request.body, shop)
+       console.log(savingToDb, "controller saved to db");
+
        // let postData = await postOrder(request.body, shop)
        // console.log(postData, "post data response");
        // if (postData.success===true) {
