@@ -42,7 +42,7 @@ export default function TabsExample() {
 			// case "Logs":
 			//   return <Logs />;
 
-			case "Failed Orders":
+			case "Orders":
 				return <Order />;
 
 			default:
