@@ -2,10 +2,14 @@ const mongoose = require('mongoose');
 
 const orderWebhookSchema = new mongoose.Schema({
   order:{
-    type:Object
+    type:Array
   },
   shop:{
     type:String
+  },
+  status:{
+    type:String,
+    default:null
   }
 });
 

@@ -6,6 +6,7 @@ import "./App.css";
 import Credentials from "./pages/Credentials";
 // import Logs from "./pages/Logs";
 import Order from "./pages/Order";
+import OrderPage from "./pages/OrderPage";
 
 export default function TabsExample() {
   const [selected, setSelected] = useState(0);
@@ -43,7 +44,7 @@ export default function TabsExample() {
 			//   return <Logs />;
 
 			case "Orders":
-				return <Order />;
+				return <OrderPage />;
 
 			default:
 				break;
