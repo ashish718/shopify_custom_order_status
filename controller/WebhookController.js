@@ -67,12 +67,8 @@ exports.showOrders = async(req, res)=>{
     }
     else {
 
-      let tempArray = []
-      docs.forEach((item, i) => {
-        tempArray.push(item.order)
-      });
 
-      res.send(tempArray)
+      res.send(docs)
 
     }
   })
