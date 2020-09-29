@@ -83,31 +83,17 @@ export default function Cresentials() {
 		//}
 	};
 
-	const orderFailed = async () => {
-		try {
-			let res = await axios.get(`/order/record/${shop}`);
-			console.log(res);
-
-			if (res) {
-				getData();
-				toggleActive();
-			}
-		} catch (error) {
-
-			console.log(error);
-		}
-	};
 
 
 	return (
 		<Frame>
-			<Page title="Failed Orders">
+			<Page title="Orders">
 				<br />
 				<br />
 				<Layout>
 					{data.length > 0 ? (
 						<Card sectioned>
-						
+
 
 							<table>
 								<thead>
@@ -148,7 +134,7 @@ export default function Cresentials() {
 							</table>
 						</Card>
 					) : (
-						<p style={{ marginTop: 100, fontSize: 20 }}>No failed Order</p>
+						<p style={{ marginTop: 100, fontSize: 20 }}>No Order yet</p>
 					)}
 					{toastMarkup}
 				</Layout>
