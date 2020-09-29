@@ -13,7 +13,7 @@ import axios from "axios";
 
 import {Button, Table} from 'react-bootstrap';
 
-export default function DataTableExample() {
+export default function Setting() {
 
   const [shop, setShop] = useState(getCookie("shop"));
   const [data, setData] = useState([]);

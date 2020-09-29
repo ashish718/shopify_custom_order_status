@@ -3,12 +3,12 @@ let orderSchema = require('../model/orderSchema')
 
 let saveOrders = async(Object, shop)=>{
 
-  Object.line_items.forEach(async (item, i) => {
+  //Object.line_items.forEach(async (item, i) => {
     let obj = {orderId:Object.name,
                 created_at:Object.created_at,
                 first_name: Object.customer.first_name,
                 last_name: Object.customer.last_name,
-                item: item.name
+                item: Object.line_items
               };
 
     const orderData = new orderSchema({
@@ -26,7 +26,7 @@ let saveOrders = async(Object, shop)=>{
       }
 
     });
-  })
+  //})
 }
 
 module.exports.saveOrders = saveOrders

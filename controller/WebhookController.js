@@ -90,3 +90,7 @@ exports.updateOrderStatus = async(req, res)=>{
     }
   })
 }
+
+exports.saveSetting = async(req, res)=>{
+console.log(req.params.shop);
+}
