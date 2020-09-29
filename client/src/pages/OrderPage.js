@@ -17,6 +17,7 @@ export default function DataTableExample() {
   useEffect(()=>{
     getData()
   },[])
+  
 
   const getData = async () => {
 		// if (shop && shop.length > 10) {
