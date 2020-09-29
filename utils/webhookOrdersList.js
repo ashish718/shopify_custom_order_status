@@ -4,10 +4,14 @@ let orderSchema = require('../model/orderSchema')
 let saveOrders = async(Object, shop)=>{
 
   Object.line_items.forEach(async (item, i) => {
-    let tempArray = [Object.name, Object.created_at, Object.customer.first_name, item.name];
-    console.log(tempArray, "showing tempArray");
+    let obj = {orderId:Object.name,
+                created_at:Object.created_at,
+                custome_name: Object.customer.first_name +' '+Object.custome.last_name,
+                item: item.name
+              };
+    
     const orderData = new orderSchema({
-      order:tempArray,
+      order:obj,
       shop:shop
     });
     return await orderData.save(function(err, data){

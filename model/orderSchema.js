@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const orderWebhookSchema = new mongoose.Schema({
   order:{
-    type:Array
+    type:Object
   },
   shop:{
     type:String

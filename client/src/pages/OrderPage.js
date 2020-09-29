@@ -4,21 +4,28 @@ import {
 	Page,
 	Card,
 	DataTable,
-	Button,
+
 	Toast,
 	Frame,
+  Select
 } from "@shopify/polaris";
 import axios from "axios";
+
+import {Button, Table} from 'react-bootstrap';
 
 export default function DataTableExample() {
 
   const [shop, setShop] = useState(getCookie("shop"));
   const [data, setData] = useState([]);
+  const [selected, setSelected] = useState('today');
+
+  const handleSelectChange = useCallback((value) => setSelected(value), []);
 
   useEffect(()=>{
     let myShop = getCookie("shop");
 		setShop(myShop);
     getData()
+
   },[])
 
   function getCookie(name) {
@@ -35,7 +42,7 @@ export default function DataTableExample() {
   const getData = async () => {
 		// if (shop && shop.length > 10) {
 			// const data = await axios.get(`/order/record/${shop}`);
-			const data = await axios.get(`/order/record/${shop}`);
+			const data = await axios.get(`/order/record/demo-mojito.myshopify.com`);
 			if (data.data.length>0) {
 				if (Array.isArray(data.data)) {
 					setData(data.data);
@@ -59,28 +66,45 @@ export default function DataTableExample() {
   //   ],
   // ];
 
+
   return (
-    <Page title="Order by product">
-      <Card>
-        <DataTable
-          columnContentTypes={[
-            'text',
-            'text',
-            'text',
-            'text',
-            'text',
-          ]}
-          headings={[
-            'Order Id',
-            'Create At',
-            'Customer Name',
-            'Item',
-            'Status',
-          ]}
-          rows={data}
-          // totals={['', '', '', 255, '$155,830.00']}
-        />
-      </Card>
-    </Page>
+
+    <div>
+    <Table striped bordered hover size="sm">
+<thead>
+  <tr>
+    <th>#</th>
+    <th>Order Id</th>
+    <th>Create At</th>
+    <th>Customer Name</th>
+    <th>Product Name</th>
+    <th>Status</th>
+  </tr>
+</thead>
+<tbody>
+
+  {data &&
+    data.map((order, key) => (
+      <tr>
+        <td>{key+1}</td>
+        <td data-column="First Name">{order.order.orderId}</td>
+        <td data-column="Last Name">{order.order.created_at}</td>
+        <td data-column="Job Title">{order.order.custome_name}</td>
+        <td data-column="Twitter">{order.order.item}</td>
+        <td data-column="Twitter">
+            <select value="Change">
+              <option value="Orange">Change Status</option>
+              <option value="Orange">Status 1</option>
+              <option value="Radish">Status 2</option>
+              <option value="Cherry">Status 3</option>
+            </select>
+        </td>
+      </tr>
+    ))}
+</tbody>
+</Table>
+    </div>
+
+
   );
 }
