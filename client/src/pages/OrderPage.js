@@ -18,6 +18,11 @@ export default function DataTableExample() {
   const [shop, setShop] = useState(getCookie("shop"));
   const [data, setData] = useState([]);
   const [selected, setSelected] = useState('today');
+	const [status, setStatus] = useState('')
+
+	const [message, setMessage] = useState(null);
+	const [active, setActive] = useState(false);
+		const [error, setError] = useState(null);
 
   const handleSelectChange = useCallback((value) => setSelected(value), []);
 
@@ -46,6 +51,7 @@ export default function DataTableExample() {
 			if (data.data.length>0) {
 				if (Array.isArray(data.data)) {
 					setData(data.data);
+					setStatus(data.data.status)
 				}
 				console.log(data.data);
 			}
@@ -67,6 +73,32 @@ export default function DataTableExample() {
   // ];
 
 
+
+		const toggleActive = useCallback(() => setActive((active) => !active), []);
+
+	const showToast = (msg, err) => {
+			err ? setError(true) : setError(false);
+			setMessage(msg);
+			toggleActive();
+		};
+
+
+	let orderUpdate = async(order, status)=>{
+		let obj = {
+			order,
+			status
+		}
+		axios.put(`/order/record/demo-mojito.myshopify.com`, obj)
+		.then(data=>{
+			console.log(data);
+			showToast("Uploaded Successfully", false);
+			getData()
+		})
+		.catch(error=>{
+			showToast("Something Wrong", true);
+		})
+	}
+
   return (
 
     <div>
@@ -79,27 +111,29 @@ export default function DataTableExample() {
     <th>Customer Name</th>
     <th>Product Name</th>
     <th>Status</th>
+		<th>Action</th>
   </tr>
 </thead>
 <tbody>
 
   {data &&
     data.map((order, key) => (
-			
+
       <tr>
         <td>{key+1}</td>
         <td data-column="First Name">{order.order.orderId}</td>
         <td data-column="Last Name">{order.order.created_at}</td>
-        <td data-column="Job Title">{order.order.first_name}</td>
+        <td data-column="Job Title">{order.order.first_name} {order.order.last_name}</td>
         <td data-column="Twitter">{order.order.item}</td>
         <td data-column="Twitter">
-            <select value="Change">
-              <option value="Orange">Change Status</option>
-              <option value="Orange">Status 1</option>
-              <option value="Radish">Status 2</option>
-              <option value="Cherry">Status 3</option>
+            <select value={order.status} onChange={(e)=>setStatus(e.target.value)}>
+							
+              <option value="Status 1">Status 1</option>
+              <option value="Status 2">Status 2</option>
+              <option value="Status 3">Status 3</option>
             </select>
         </td>
+				<td><Button onClick={()=>orderUpdate(order, status)}>Save</Button></td>
       </tr>
     ))}
 </tbody>
