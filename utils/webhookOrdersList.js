@@ -6,10 +6,11 @@ let saveOrders = async(Object, shop)=>{
   Object.line_items.forEach(async (item, i) => {
     let obj = {orderId:Object.name,
                 created_at:Object.created_at,
-                custome_name: Object.customer.first_name +' '+Object.custome.last_name,
+                first_name: Object.customer.first_name,
+                last_name: Object.custome.last_name,
                 item: item.name
               };
-    
+
     const orderData = new orderSchema({
       order:obj,
       shop:shop
