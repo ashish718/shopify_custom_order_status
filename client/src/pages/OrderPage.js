@@ -85,11 +85,12 @@ export default function DataTableExample() {
 
   {data &&
     data.map((order, key) => (
+			
       <tr>
         <td>{key+1}</td>
         <td data-column="First Name">{order.order.orderId}</td>
         <td data-column="Last Name">{order.order.created_at}</td>
-        <td data-column="Job Title">{order.order.custome_name}</td>
+        <td data-column="Job Title">{order.order.first_name}</td>
         <td data-column="Twitter">{order.order.item}</td>
         <td data-column="Twitter">
             <select value="Change">

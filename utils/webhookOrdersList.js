@@ -7,7 +7,7 @@ let saveOrders = async(Object, shop)=>{
     let obj = {orderId:Object.name,
                 created_at:Object.created_at,
                 first_name: Object.customer.first_name,
-                last_name: Object.custome.last_name,
+                last_name: Object.customer.last_name,
                 item: item.name
               };
 
