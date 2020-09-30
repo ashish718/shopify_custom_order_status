@@ -6,6 +6,7 @@
 // let {findMappedDataByVId} = require('../service/saveMappedData')
 let {saveOrders} = require('../utils/webhookOrdersList')
 let orderSchema = require('../model/orderSchema')
+let settingSchema = require('../model/settingSchema')
 
 exports.CreateOrder = async (request, response) =>{
 
@@ -112,5 +113,30 @@ exports.updateOrderStatus = async(req, res)=>{
 }
 
 exports.saveSetting = async(req, res)=>{
-console.log(req.params.shop);
+
+  const settingData = new settingSchema({
+    tag:req.body.tagValue,
+    inputValue:req.body.makeInputArray,
+    shop:req.params.shop
+  });
+  console.log(settingData, "json obj");
+  await settingData.save(function(err, result){
+    if (err) {
+      res.send(err)
+    }
+    else {
+      res.send(result)
+    }
+  })
+}
+
+exports.getSetting = async(req, res)=>{
+  await settingSchema.find({shop:req.params.shop}, function(err, docs){
+    if (err) {
+      res.send(err)
+    }
+    else {
+      res.send(docs)
+    }
+  })
 }

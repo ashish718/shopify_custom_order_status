@@ -9,6 +9,7 @@ import Credentials from "./pages/Credentials";
 // import Logs from "./pages/Logs";
 import Order from "./pages/Order";
 import OrderPage from "./pages/OrderPage";
+import SettingPage from "./pages/SettingPage";
 
 export default function TabsExample() {
   const [selected, setSelected] = useState(0);
@@ -30,6 +31,11 @@ export default function TabsExample() {
       content: "Orders",
       panelID: "abandon-checkout-content",
     },
+    {
+      id: "all-customers",
+      content: "Settings",
+      panelID: "all-customers-content",
+    },
     // {
     //   id: "accepts-marketing",
     //   content: "Logs",
@@ -39,14 +45,17 @@ export default function TabsExample() {
 
   const tabChangeHandler = (params) => {
     switch (tabs[selected].content) {
-			case "Credentials":
-				return <Credentials />;
+			// case "Credentials":
+			// 	return <Credentials />;
 
 			// case "Logs":
 			//   return <Logs />;
 
 			case "Orders":
 				return <OrderPage />;
+
+      case "Settings":
+  			return <SettingPage />;
 
 			default:
 				break;
