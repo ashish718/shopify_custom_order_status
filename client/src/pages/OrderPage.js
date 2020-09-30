@@ -83,9 +83,10 @@ export default function DataTableExample() {
 		};
 
 
-	let orderUpdate = async(order, status)=>{
+	let orderUpdate = async(orderId, item, status)=>{
 		let obj = {
-			order,
+			orderId,
+			item,
 			status
 		}
 		axios.put(`/order/record/demo-mojito.myshopify.com`, obj)
@@ -109,9 +110,8 @@ export default function DataTableExample() {
     <th>Order Id</th>
     <th>Create At</th>
     <th>Customer Name</th>
-    <th>Product Name</th>
-    <th>Status</th>
-		<th>Action</th>
+    <th>Product Name & Action</th>
+
   </tr>
 </thead>
 <tbody>
@@ -125,16 +125,23 @@ export default function DataTableExample() {
         <td data-column="First Name">{order.order.orderId}</td>
         <td data-column="Last Name">{order.order.created_at}</td>
         <td data-column="Job Title">{order.order.first_name} {order.order.last_name}</td>
-        <td data-column="Twitter">{order.order.item}</td>
-        <td data-column="Twitter">
-            <select value={order.status} onChange={(e)=>setStatus(e.target.value)}>
+        <td data-column="Twitter">{order.order.item.map((item, x)=>(
+					<tr><td>{item.name}</td>
+					<td data-column="Twitter">
+	            <select value={item.status} onChange={(e)=>setStatus(e.target.value)}>
 
-              <option value="Status 1">Status 1</option>
-              <option value="Status 2">Status 2</option>
-              <option value="Status 3">Status 3</option>
-            </select>
-        </td>
-				<td><Button onClick={()=>orderUpdate(order, status)}>Save</Button></td>
+	              <option value="Status 1">Status 1</option>
+	              <option value="Status 2">Status 2</option>
+	              <option value="Status 3">Status 3</option>
+	            </select>
+	        </td>
+
+					<td><Button onClick={()=>orderUpdate(order.order.orderId, item, status)}>Save</Button></td>
+					</tr>
+
+				))}</td>
+
+
       </tr>
     ))}
 </tbody>

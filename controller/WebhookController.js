@@ -77,16 +77,36 @@ exports.showOrders = async(req, res)=>{
 
 
 exports.updateOrderStatus = async(req, res)=>{
-  console.log(req.body);
-  console.log(req.params.shop);
-  await orderSchema.findOneAndUpdate({_id:req.body.order._id}, {$set:{status:req.body.status}}, { new: true }, function(err, docs){
+  // console.log(req.body);
+  // console.log(req.params.shop);
+  // await orderSchema.findOneAndUpdate({_id:req.body.order._id}, {$set:{status:req.body.status}}, { new: true }, function(err, docs){
+  //   if (err) {
+  //     console.log(err);
+  //     res.send(err)
+  //   }
+  //   else {
+  //     console.log(docs, "update successfully");
+  //     res.send(docs);
+  //   }
+  // })
+
+  await orderSchema.findOne({shop:req.params.shop, "order.orderId":req.body.orderId}, function(err, docs){
     if (err) {
       console.log(err);
       res.send(err)
     }
     else {
-      console.log(docs, "update successfully");
-      res.send(docs);
+      orderSchema.updateOne({"order.item.id": req.body.item.id}, {$set:{"order.item.$.status": req.body.status}}, function(err, data) {
+        if (err) {
+          console.log(err, "update err");
+          res.send(err)
+        }
+        else {
+          console.log(data);
+          res.send(data)
+        }
+      })
+
     }
   })
 }
