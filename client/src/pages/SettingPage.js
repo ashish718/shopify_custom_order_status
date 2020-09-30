@@ -41,7 +41,7 @@ export default function SettingPage() {
   const getData = async () => {
 		// if (shop && shop.length > 10) {
 			// const data = await axios.get(`/order/record/${shop}`);
-			const data = await axios.get(`/order/setting/demo-mojito.myshopify.com`);
+			const data = await axios.get(`/order/setting/${shop}`);
 			if (data.data.length>0) {
 				if (Array.isArray(data.data)) {
 					setData(data.data);
@@ -60,7 +60,7 @@ export default function SettingPage() {
     console.log({tagValue, inputValue});
 
     let makeInputArray = inputValue.split(',')
-    let settingdata = await axios.post('/order/setting/demo-mojito.myshopify.com', {tagValue, makeInputArray})
+    let settingdata = await axios.post(`/order/setting/${shop}`, {tagValue, makeInputArray})
       console.log(settingdata);
       getData()
 
@@ -98,7 +98,6 @@ export default function SettingPage() {
   <tbody>
   {data &&
     data.map((setting, key) => (
-
       <tr>
         <td>{key+1}</td>
         <td data-column="First Name">{setting.tag}</td>
