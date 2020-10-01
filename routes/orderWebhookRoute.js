@@ -6,5 +6,5 @@ router.get('/record/:shop', WebhookController.showOrders)
 router.put('/record/:shop', WebhookController.updateOrderStatus)
 router.post('/setting/:shop', WebhookController.saveSetting)
 router.get('/setting/:shop', WebhookController.getSetting)
-
+router.delete('/setting/:shop/:id', WebhookController.deleteSetting)
 module.exports = router

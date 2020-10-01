@@ -140,3 +140,16 @@ exports.getSetting = async(req, res)=>{
     }
   })
 }
+
+exports.deleteSetting = async(req, res)=>{
+  console.log(req.params);
+  await settingSchema.deleteOne({_id:req.params.id}, function(err, docs){
+    if (err) {
+      console.log(err);
+    }
+    else {
+      console.log(docs);
+      res.send(docs)
+    }
+  })
+}

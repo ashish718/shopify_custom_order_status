@@ -41,7 +41,7 @@ export default function SettingPage() {
   const getData = async () => {
 		// if (shop && shop.length > 10) {
 			// const data = await axios.get(`/order/record/${shop}`);
-			const data = await axios.get(`/order/setting/${shop}`);
+			const data = await axios.get(`/order/setting/demo-mojito.myshopify.com`);
 			if (data.data.length>0) {
 				if (Array.isArray(data.data)) {
 					setData(data.data);
@@ -60,26 +60,34 @@ export default function SettingPage() {
     console.log({tagValue, inputValue});
 
     let makeInputArray = inputValue.split(',')
-    let settingdata = await axios.post(`/order/setting/${shop}`, {tagValue, makeInputArray})
+    let settingdata = await axios.post(`/order/setting/demo-mojito.myshopify.com`, {tagValue, makeInputArray})
       console.log(settingdata);
+			setTagValue('')
+			setInputValue('')
       getData()
 
   }
+
+	let deleteTag = async(item)=>{
+		let deleteres = await axios.delete(`/order/setting/demo-mojito.myshopify.com/${item._id}`)
+		console.log(deleteres, "deleteres");
+		getData()
+	}
 
   return (
 
     <div>
 
-    <form class="form-inline" onSubmit={submitFunction}>
-        <div class="form-group mb-2">
-          <label for="staticEmail2" class="sr-only">Tag Number</label>
-          <input type="text" class="form-control" id="staticEmail2" value={tagValue} placeholder=" input tag0" onChange={(e)=>setTagValue(e.target.value)}/>
+    <form className="form-inline" onSubmit={submitFunction}>
+        <div className="form-group mb-2">
+          <label for="staticEmail2" className="sr-only">Tag Number</label>
+          <input type="text" className="form-control" id="staticEmail2" value={tagValue} placeholder=" input tag0" onChange={(e)=>setTagValue(e.target.value)}/>
         </div>
-        <div class="form-group mx-sm-3 mb-2">
-          <label for="inputPassword2" class="sr-only">Status Value</label>
-          <input type="text" class="form-control" id="inputPassword2" placeholder="new, fulfilled, delivered, cancelled" value={inputValue} onChange={(e)=>setInputValue(e.target.value)}/>
+        <div classNameName="form-group mx-sm-3 mb-2">
+          <label for="inputPassword2" className="sr-only">Status Value</label>
+          <input type="text" className="form-control" id="inputPassword2" placeholder="new, fulfilled, delivered, cancelled" value={inputValue} onChange={(e)=>setInputValue(e.target.value)}/>
         </div>
-        <button type="submit" class="btn btn-primary mb-2">save</button>
+        <button type="submit" className="btn btn-primary mb-2">save</button>
     </form>
 
     <br/>
@@ -102,6 +110,7 @@ export default function SettingPage() {
         <td>{key+1}</td>
         <td data-column="First Name">{setting.tag}</td>
         <td data-column="First Name">{setting.inputValue}</td>
+				<td><Button onClick={()=>deleteTag(setting)} className="btn btn-danger">Delete</Button></td>
       </tr>
     ))}
   </tbody>
