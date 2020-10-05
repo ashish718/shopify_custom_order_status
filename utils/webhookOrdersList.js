@@ -20,7 +20,7 @@ let saveOrders = async(Object, shop)=>{
                 created_at:Object.created_at,
                 first_name: Object.customer.first_name,
                 last_name: Object.customer.last_name,
-                item: Object.line_items
+                item: newArray
               };
 
     const orderData = new orderSchema({
