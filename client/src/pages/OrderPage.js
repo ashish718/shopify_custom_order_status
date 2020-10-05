@@ -60,6 +60,7 @@ export default function DataTableExample() {
 			}
 	};
 
+
   // const rows = [
   //   ['Emerald Silk Gown', '$875.00', 124689, 140, '$122,500.00'],
   //   ['Mauve Cashmere Scarf', '$230.00', 124533, 83, '$19,090.00'],
@@ -129,10 +130,11 @@ export default function DataTableExample() {
 					<tr><td>{item.name}</td>
 					<td data-column="Twitter">
 	            <select value={item.status} onChange={(e)=>setStatus(e.target.value)}>
+								{item.tagValue.map((tag, l) => (
+									<option value={tag}>{tag}</option>
+								))
+								}
 
-	              <option value="Status 1">Status 1</option>
-	              <option value="Status 2">Status 2</option>
-	              <option value="Status 3">Status 3</option>
 	            </select>
 	        </td>
 

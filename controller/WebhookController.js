@@ -67,9 +67,29 @@ exports.showOrders = async(req, res)=>{
 
     }
     else {
+       settingSchema.find({shop:req.params.shop}, function(err, data){
+        if (err) {
+          res.send(err)
+        }
+        else {
+        docs.forEach((item, i) => {
+          item.order.item.forEach((orderItem, j) => {
+            data.forEach((tagItem, k) => {
+              if (orderItem.tag===tagItem.tag) {
+                orderItem.tagValue = tagItem.inputValue
+              }
+            });
 
+          });
 
-      res.send(docs)
+        });
+
+        res.send(docs)
+
+        }
+      })
+
+      // res.send(docs)
 
     }
   })
