@@ -4,23 +4,24 @@ let {newShopify} = require('./test/test1.js')
 
 let shopifyTagData = async(Object, shop)=>{
   let newArray = []
-  Object.line_items.forEach(async(item, i) => {
+  let result = await Object.line_items.map(async(item, i) => {
     let data =await newShopify(shop, item.product_id)
 
     if (data.tags!="") {
 
       item.tag = data.tags
       console.log(item);
-      newArray.push(item)
+      return item
     }
   });
   // console.log(newArray.length, "length check");
-  return await Promise.all(newArray)
+  return await Promise.all(result)
 }
 
 let saveOrders = async(Object, shop)=>{
 
 let itemData = await shopifyTagData(Object, shop)
+
 console.log(itemData, " without if condition itemData");
 if (itemData.length>0) {
   console.log(itemData, "itemData");
