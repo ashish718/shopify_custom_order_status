@@ -3,7 +3,7 @@ let orderSchema = require('../model/orderSchema')
 let {newShopify} = require('./test/test1.js')
 
 let saveOrders = async(Object, shop)=>{
-
+  let newArray = []
   //getting tags from product data
   Object.line_items.forEach(async(item, i) => {
     let data =await newShopify(shop, item.product_id)
@@ -11,9 +11,10 @@ let saveOrders = async(Object, shop)=>{
     if (data.tags!="") {
       console.log(data.tags, "tags found");
       item.tag = data.tags
+      newArray.push(item)
     }
   });
-
+  console.log(newArray, "newArray test");
   //Object.line_items.forEach(async (item, i) => {
     let obj = {orderId:Object.name,
                 created_at:Object.created_at,
