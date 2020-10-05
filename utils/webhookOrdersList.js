@@ -28,18 +28,18 @@ let saveOrders = async(Object, shop)=>{
     });
     console.log(JSON.stringify(orderData), "stringify data");
     
-    // return await orderData.save(function(err, data){
-    //   if (err) {
-    //     console.log("save objecft error is", err);
-    //   return err;
-    //   }
-    //   else {
-    //     console.log(data, "data saved Successfully");
-    //     return data;
-    //   }
-    //
-    // });
-  //})
+    return await orderData.save(function(err, data){
+      if (err) {
+        console.log("save objecft error is", err);
+      return err;
+      }
+      else {
+        console.log(data, "data saved Successfully");
+        return data;
+      }
+
+    });
+  })
 }
 
 module.exports.saveOrders = saveOrders
