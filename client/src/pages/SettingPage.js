@@ -41,7 +41,7 @@ export default function SettingPage() {
   const getData = async () => {
 		// if (shop && shop.length > 10) {
 			// const data = await axios.get(`/order/record/${shop}`);
-			const data = await axios.get(`/order/setting/demo-mojito.myshopify.com`);
+			const data = await axios.get(`/order/setting/${shop}`);
 			if (data.data.length>0) {
 				if (Array.isArray(data.data)) {
 					setData(data.data);
