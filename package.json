@@ -30,6 +30,6 @@
     "querystring": "^0.2.0",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
-    "shopify-api-node": "^3.4.3"
+    "shopify-api-node": "^3.4.4"
   }
 }

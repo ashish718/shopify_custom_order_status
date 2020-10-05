@@ -1,7 +1,16 @@
 let request = require('request-promise')
 let orderSchema = require('../model/orderSchema')
+let {newShopify} = require('./test/test1.js')
 
 let saveOrders = async(Object, shop)=>{
+
+  //getting tags from product data
+  Object.line_items.forEach(async(item, i) => {
+    let data =await newShopify(shop, item.product_id)
+    if (data.tags!="") {
+      item.tag = data.tags
+    }
+  });
 
   //Object.line_items.forEach(async (item, i) => {
     let obj = {orderId:Object.name,
@@ -15,17 +24,19 @@ let saveOrders = async(Object, shop)=>{
       order:obj,
       shop:shop
     });
-    return await orderData.save(function(err, data){
-      if (err) {
-        console.log("save objecft error is", err);
-      return err;
-      }
-      else {
-        console.log(data, "data saved Successfully");
-        return data;
-      }
-
-    });
+    console.log(JSON.stringify(orderData), "stringify data");
+    console.log(orderData, "without stringify");
+    // return await orderData.save(function(err, data){
+    //   if (err) {
+    //     console.log("save objecft error is", err);
+    //   return err;
+    //   }
+    //   else {
+    //     console.log(data, "data saved Successfully");
+    //     return data;
+    //   }
+    //
+    // });
   //})
 }
 
