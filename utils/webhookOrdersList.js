@@ -7,7 +7,9 @@ let saveOrders = async(Object, shop)=>{
   //getting tags from product data
   Object.line_items.forEach(async(item, i) => {
     let data =await newShopify(shop, item.product_id)
+    console.log(data, "product data found");
     if (data.tags!="") {
+      console.log(data.tags, "tags found");
       item.tag = data.tags
     }
   });
@@ -25,7 +27,7 @@ let saveOrders = async(Object, shop)=>{
       shop:shop
     });
     console.log(JSON.stringify(orderData), "stringify data");
-    console.log(orderData, "without stringify");
+    
     // return await orderData.save(function(err, data){
     //   if (err) {
     //     console.log("save objecft error is", err);
