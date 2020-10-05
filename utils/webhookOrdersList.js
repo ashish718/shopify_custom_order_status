@@ -2,33 +2,41 @@ let request = require('request-promise')
 let orderSchema = require('../model/orderSchema')
 let {newShopify} = require('./test/test1.js')
 
-let saveOrders = async(Object, shop)=>{
+let shopifyTagData = async(Object, shop)=>{
   let newArray = []
-  //getting tags from product data
   Object.line_items.forEach(async(item, i) => {
     let data =await newShopify(shop, item.product_id)
-    console.log(data, "product data found");
+
     if (data.tags!="") {
-      console.log(data.tags, "tags found");
+      
       item.tag = data.tags
       newArray.push(item)
     }
   });
-  console.log(newArray, "newArray test");
+  return await Promise.all(newArray)
+}
+
+let saveOrders = async(Object, shop)=>{
+
+let itemData = await shopifyTagData(Object, shop).then(data=>{
+  console.log(data, "then functipn data");
+})
+console.log(itemData);
+
   //Object.line_items.forEach(async (item, i) => {
     let obj = await {
                 orderId:Object.name,
                 created_at:Object.created_at,
                 first_name: Object.customer.first_name,
                 last_name: Object.customer.last_name,
-                item: newArray
+
               };
 
     const orderData = new orderSchema({
       order:obj,
       shop:shop
     });
-    
+
     console.log(JSON.stringify(orderData), "stringify data");
     console.log(orderData, "without stringify");
     // return await orderData.save(function(err, data){
