@@ -27,7 +27,7 @@ let saveOrders = async(Object, shop)=>{
       shop:shop
     });
     console.log(JSON.stringify(orderData), "stringify data");
-    
+    console.log(orderData, "without stringify");
     return await orderData.save(function(err, data){
       if (err) {
         console.log("save objecft error is", err);
@@ -39,7 +39,7 @@ let saveOrders = async(Object, shop)=>{
       }
 
     });
-  })
+  //})
 }
 
 module.exports.saveOrders = saveOrders
