@@ -16,7 +16,8 @@ let saveOrders = async(Object, shop)=>{
   });
   console.log(newArray, "newArray test");
   //Object.line_items.forEach(async (item, i) => {
-    let obj = {orderId:Object.name,
+    let obj = await {
+                orderId:Object.name,
                 created_at:Object.created_at,
                 first_name: Object.customer.first_name,
                 last_name: Object.customer.last_name,
@@ -27,19 +28,20 @@ let saveOrders = async(Object, shop)=>{
       order:obj,
       shop:shop
     });
+    
     console.log(JSON.stringify(orderData), "stringify data");
     console.log(orderData, "without stringify");
-    return await orderData.save(function(err, data){
-      if (err) {
-        console.log("save objecft error is", err);
-      return err;
-      }
-      else {
-        console.log(data, "data saved Successfully");
-        return data;
-      }
-
-    });
+    // return await orderData.save(function(err, data){
+    //   if (err) {
+    //     console.log("save objecft error is", err);
+    //   return err;
+    //   }
+    //   else {
+    //     console.log(data, "data saved Successfully");
+    //     return data;
+    //   }
+    //
+    // });
   //})
 }
 
