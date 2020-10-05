@@ -10,10 +10,11 @@ let shopifyTagData = async(Object, shop)=>{
     if (data.tags!="") {
 
       item.tag = data.tags
+      console.log(item);
       newArray.push(item)
     }
   });
-  console.log(newArray.length, "length check");
+  // console.log(newArray.length, "length check");
   return await Promise.all(newArray)
 }
 
