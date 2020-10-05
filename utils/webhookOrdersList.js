@@ -6,22 +6,25 @@ let shopifyTagData = async(Object, shop)=>{
   let newArray = []
   Object.line_items.forEach(async(item, i) => {
     let data =await newShopify(shop, item.product_id)
-    console.log(data, "product data found");
+
     if (data.tags!="") {
-      console.log(data.tags, "tags found");
+
       item.tag = data.tags
       newArray.push(item)
     }
   });
+  console.log(newArray.length, "length check");
   return await Promise.all(newArray)
 }
 
 let saveOrders = async(Object, shop)=>{
 
 let itemData = await shopifyTagData(Object, shop)
+console.log(itemData, " without if condition itemData");
 if (itemData.length>0) {
   console.log(itemData, "itemData");
 }
+
 
   //Object.line_items.forEach(async (item, i) => {
     // let obj = await {
