@@ -78,6 +78,9 @@ exports.showOrders = async(req, res)=>{
               if (orderItem.tag===tagItem.tag) {
                 orderItem.tagValue = tagItem.inputValue
               }
+              else {
+                orderItem.tagValue = ["No Tag Found"]
+              }
             });
 
           });
