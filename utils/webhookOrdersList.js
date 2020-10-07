@@ -1,11 +1,15 @@
 let request = require('request-promise')
 let orderSchema = require('../model/orderSchema')
 let {newShopify} = require('./test/test1.js')
+let {getSingleStore} = require('../service/storeService')
 
 let shopifyTagData = async(Object, shop)=>{
+  let storeCredentials = await getSingleStore(shop)
   let newArray = []
+
+
   let result = await Object.line_items.map(async(item, i) => {
-    let data =await newShopify(shop, item.product_id)
+    let data =await newShopify(shop, item.product_id, storeCredentials[0])
 
     if (data.tags!="") {
 

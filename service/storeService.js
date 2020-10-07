@@ -52,3 +52,19 @@ let storeCredentialsSchema = require('../model/storeCredentialsSchema')
         }
     );
 }
+
+module.exports.getSingleStore = async (shop)=>{
+  return storeCredentialsSchema.find(
+        {"shop":shop}
+        ,
+        function (err, data) {
+          if (data) {
+            console.log('store found in DB', data);
+            return data
+          } else {
+            console.log("store not found");
+            return "store not found"
+          }
+}
+)
+}
