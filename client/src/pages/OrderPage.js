@@ -117,7 +117,7 @@ export default function DataTableExample() {
 </thead>
 <tbody>
 
-  {data &&
+  {data.length>0?(
     data.map((order, key) => (
 
       <tr>
@@ -145,7 +145,7 @@ export default function DataTableExample() {
 
 
       </tr>
-    ))}
+    ))):("No Order Found")}
 </tbody>
 </Table>
     </div>
