@@ -72,21 +72,25 @@ exports.showOrders = async(req, res)=>{
           res.send(err)
         }
         else {
+
+          console.log(data, "setting data");
         docs.forEach((item, i) => {
           item.order.item.forEach((orderItem, j) => {
             data.forEach((tagItem, k) => {
-              if (orderItem.tag.includes(tagItem.tag)) {
+              if (orderItem.tag === tagItem.tag) {
                 orderItem.tagValue = tagItem.inputValue
+                return orderItem;
               }
               else {
                 orderItem.tagValue = ["No Tag Found"]
+                return orderItem;
               }
             });
 
           });
 
         });
-
+        //console.log(JSON.stringify(docs));
         res.send(docs)
 
         }

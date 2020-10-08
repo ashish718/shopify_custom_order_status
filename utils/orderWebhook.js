@@ -29,7 +29,7 @@ const forwardingAddress = process.env.SHOPIFY_FORWARD_ADDRESS;
     let saveFyndCredentials = await saveCredential(token, shop, hmac, code, getLocation[0].id)
     console.log(saveFyndCredentials, "save fynd credentials is");
 
-  const webhookUrl = 'https://' + shop + '/admin/api/2020-01/webhooks.json';
+  const webhookUrl = 'https://' + shop + '/admin/api/2020-07/webhooks.json';
 
 
   let webhookTopic = ["orders/create", "orders/cancelled", "refunds/create"]

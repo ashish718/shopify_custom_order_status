@@ -47,7 +47,7 @@ export default function DataTableExample() {
   const getData = async () => {
 		// if (shop && shop.length > 10) {
 			// const data = await axios.get(`/order/record/${shop}`);
-			const data = await axios.get(`/order/record/${shop}`);
+			const data = await axios.get(`/order/record/mydiagnostics.myshopify.com`);
 			if (data.data.length>0) {
 				if (Array.isArray(data.data)) {
 					setData(data.data);
@@ -130,10 +130,7 @@ export default function DataTableExample() {
 					<tr><td>{item.name}</td>
 					<td data-column="Twitter">
 	            <select value={item.status} onChange={(e)=>setStatus(e.target.value)}>
-								{item.tagValue.map((tag, l) => (
-									<option value={tag}>{tag}</option>
-								))
-								}
+								
 
 	            </select>
 	        </td>
