@@ -9,9 +9,9 @@ let newShopify = async(shop, productId, credential)=>{
         'Content-Type': 'application/json',
         'X-Shopify-Hmac-Sha256': credential.hmac,
         'X-Shopify-Shop-Domain': shop,
-        'X-Shopify-API-Version': '2020-10',
+        'X-Shopify-API-Version': '2020-07',
       };
-  return await request.get(`https://${shop}/admin/api/2020-10/products/${productId}.json`, {headers:shopRequestHeaders})
+  return await request.get(`https://${shop}/admin/api/2020-07/products/${productId}.json`, {headers:shopRequestHeaders})
   .then(data=>{
     data = JSON.parse(data)
     // console.log(data.product);
