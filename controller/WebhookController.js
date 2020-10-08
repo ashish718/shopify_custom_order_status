@@ -75,7 +75,7 @@ exports.showOrders = async(req, res)=>{
         docs.forEach((item, i) => {
           item.order.item.forEach((orderItem, j) => {
             data.forEach((tagItem, k) => {
-              if (orderItem.tag===tagItem.tag) {
+              if (orderItem.tag.includes(tagItem.tag)) {
                 orderItem.tagValue = tagItem.inputValue
               }
               else {
