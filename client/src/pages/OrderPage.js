@@ -47,12 +47,14 @@ export default function DataTableExample() {
   const getData = async () => {
 		// if (shop && shop.length > 10) {
 			// const data = await axios.get(`/order/record/${shop}`);
-			const data = await axios.get(`/order/record/${shop}`);
+			const data = await axios.get(`/order/record/mydiagnostics.myshopify.com`);
 			if (data.data.length>0) {
-				if (Array.isArray(data.data)) {
-					setData(data.data);
-					setStatus(data.data.status)
-				}
+
+				setData(data.data)
+				// if (Array.isArray(data.data)) {
+				// 	setData(data.data);
+				// 	setStatus(data.data.status)
+				// }
 				console.log(data.data);
 			}
 			else {

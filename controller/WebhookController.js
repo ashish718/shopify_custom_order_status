@@ -68,9 +68,9 @@ exports.showOrders = async(req, res)=>{
         }
         else {
           let matchTagFunction = await matchOrderTags(docs, data)
-          console.log(matchTagFunction);
+          // console.log(matchTagFunction);
           if (matchTagFunction.length>0) {
-            console.log(JSON.stringify(matchTagFunction));
+            // console.log(JSON.stringify(matchTagFunction));
             res.send(matchTagFunction)
           }
           else {
