@@ -1,10 +1,5 @@
-// let {postOrder} = require('../utils/fyndCreateOrder')
-// let {cancelOrder} = require('../utils/fyndCancelOrder')
-// let {triggerToShopify} = require('../utils/fyndOrderWebhook')
-// let {saveFailedOrders, getFailedOrders} = require('../service/OrderDataMapping')
-// let {orderTrigger} = require('../utils/FailedOrdersTrigger')
-// let {findMappedDataByVId} = require('../service/saveMappedData')
 let {saveOrders} = require('../utils/webhookOrdersList')
+let {matchOrderTags} = require('../utils/matchTag')
 let orderSchema = require('../model/orderSchema')
 let settingSchema = require('../model/settingSchema')
 
@@ -67,31 +62,40 @@ exports.showOrders = async(req, res)=>{
 
     }
     else {
-       settingSchema.find({shop:req.params.shop}, function(err, data){
+       settingSchema.find({shop:req.params.shop}, async function(err, data){
         if (err) {
           res.send(err)
         }
         else {
+          let matchTagFunction = await matchOrderTags(docs, data)
+          console.log(matchTagFunction);
+          if (matchTagFunction.length>0) {
+            console.log(JSON.stringify(matchTagFunction));
+            res.send(matchTagFunction)
+          }
+          else {
+            console.log("nothing found");
+          }
 
-          console.log(data, "setting data");
-        docs.forEach((item, i) => {
-          item.order.item.forEach((orderItem, j) => {
-            data.forEach((tagItem, k) => {
-              if (orderItem.tag === tagItem.tag) {
-                orderItem.tagValue = tagItem.inputValue
-                return orderItem;
-              }
-              else {
-                orderItem.tagValue = ["No Tag Found"]
-                return orderItem;
-              }
-            });
-
-          });
-
-        });
-        //console.log(JSON.stringify(docs));
-        res.send(docs)
+        //   console.log(data, "setting data");
+        // docs.forEach((item, i) => {
+        //   item.order.item.forEach((orderItem, j) => {
+        //     data.forEach((tagItem, k) => {
+        //       if (orderItem.tag === tagItem.tag) {
+        //         orderItem.tagValue = tagItem.inputValue
+        //         return orderItem;
+        //       }
+        //       else {
+        //         orderItem.tagValue = ["No Tag Found"]
+        //         return orderItem;
+        //       }
+        //     });
+        //
+        //   });
+        //
+        // });
+        // //console.log(JSON.stringify(docs));
+        // res.send(docs)
 
         }
       })

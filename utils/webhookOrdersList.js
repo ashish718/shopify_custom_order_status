@@ -60,6 +60,7 @@ let itemData = await shopifyTagData(Object, shop)
 
       });
   }
+  return "done";
 }
 
 module.exports.saveOrders = saveOrders
