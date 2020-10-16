@@ -46,8 +46,8 @@ let itemData = await shopifyTagData(Object, shop)
         shop:shop
       });
 
-      console.log(JSON.stringify(orderData), "stringify data");
-      console.log(orderData, "without stringify");
+      // console.log(JSON.stringify(orderData), "stringify data");
+      // console.log(orderData, "without stringify");
       return await orderData.save(function(err, data){
         if (err) {
           console.log("save objecft error is", err);

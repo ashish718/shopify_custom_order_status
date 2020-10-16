@@ -16,12 +16,14 @@ exports.CreateOrder = async (request, response) =>{
      if (topic==='orders/create') {
        console.log(request.body, "order create request body");
        let savingToDb = await saveOrders(request.body, shop)
-       // if (savingToDb) {
+       console.log(savingToDb);
+       if (savingToDb) {
+
          response.send("saved Successfully")
-       // }
-       // else {
-       //   response.send("something went wrong")
-       // }
+       }
+       else {
+         response.send("something went wrong")
+       }
 
        // let postData = await postOrder(request.body, shop)
        // console.log(postData, "post data response");
