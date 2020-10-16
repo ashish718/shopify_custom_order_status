@@ -48,7 +48,7 @@ let itemData = await shopifyTagData(Object, shop)
 
       // console.log(JSON.stringify(orderData), "stringify data");
       // console.log(orderData, "without stringify");
-      return await orderData.save(function(err, data){
+       await orderData.save(function(err, data){
         if (err) {
           console.log("save objecft error is", err);
         return err;
@@ -59,8 +59,9 @@ let itemData = await shopifyTagData(Object, shop)
         }
 
       });
+      return "done";
   }
-  return "done";
+
 }
 
 module.exports.saveOrders = saveOrders
