@@ -3,6 +3,7 @@ let {matchOrderTags} = require('../utils/matchTag')
 let orderSchema = require('../model/orderSchema')
 let settingSchema = require('../model/settingSchema')
 
+
 exports.CreateOrder = async (request, response) =>{
 
   let shop = request.params.shop;
@@ -15,16 +16,29 @@ exports.CreateOrder = async (request, response) =>{
    try {
      if (topic==='orders/create') {
        console.log(request.body, "order create request body");
-       let savingToDb = await saveOrders(request.body, shop)
-        console.log(savingToDb, "savingToDb");
-       if (savingToDb==="done") {
 
-       response.send(savingToDb)
-       }
-       else {
-         response.send("something went wrong")
+       let data = await orderSchema.find({"shop":request.params.shop, "order.orderId":request.body.name})
+
+       if (data.length>0) {
+
+         response.status(200).send("duplicate")
+
        }
 
+       else{
+
+           let savingToDb = await saveOrders(request.body, shop)
+            console.log(savingToDb, "savingToDb");
+           // if (savingToDb==="done") {
+           //
+           // response.send(savingToDb)
+           // }
+           // else {
+           //   response.send("something went wrong")
+           // }
+           console.log(savingToDb);
+           res.status(200).send(savingToDb)
+        }
        // let postData = await postOrder(request.body, shop)
        // console.log(postData, "post data response");
        // if (postData.success===true) {

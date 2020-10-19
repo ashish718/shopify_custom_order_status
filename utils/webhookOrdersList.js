@@ -31,35 +31,45 @@ let saveOrders = async(Object, shop)=>{
 let itemData = await shopifyTagData(Object, shop)
 
   if (itemData.length>0) {
-    console.log(itemData, "itemData");
-    //Object.line_items.forEach(async (item, i) => {
-      let obj = await {
-                  orderId:Object.name,
-                  created_at:Object.created_at,
-                  first_name: Object.customer.first_name,
-                  last_name: Object.customer.last_name,
-                  item: itemData
-                };
+    let data = await orderSchema.find({"shop":request.params.shop, "order.orderId":request.body.name})
+    if (data.length>0) {
+      return "Duplicate Item";
+    }
+    else {
+      console.log(itemData, "itemData");
+      //Object.line_items.forEach(async (item, i) => {
+        let obj = await {
+                    orderId:Object.name,
+                    created_at:Object.created_at,
+                    first_name: Object.customer.first_name,
+                    last_name: Object.customer.last_name,
+                    item: itemData
+                  };
 
-      const orderData = new orderSchema({
-        order:obj,
-        shop:shop
-      });
+        const orderData = new orderSchema({
+          order:obj,
+          shop:shop
+        });
 
-      // console.log(JSON.stringify(orderData), "stringify data");
-      // console.log(orderData, "without stringify");
-       await orderData.save(function(err, data){
-        if (err) {
-          console.log("save objecft error is", err);
-        return err;
-        }
-        else {
-          console.log(data, "data saved Successfully");
-          return data;
-        }
+        // console.log(JSON.stringify(orderData), "stringify data");
+        // console.log(orderData, "without stringify");
+         await orderData.save(function(err, data){
+          if (err) {
+            console.log("save objecft error is", err);
+          return err;
+          }
+          else {
+            console.log(data, "data saved Successfully");
+            return data;
+          }
 
-      });
-      return "done";
+        });
+        return "done";
+    }
+
+  }
+  else {
+    return "not saved something wrong";
   }
 
 }
