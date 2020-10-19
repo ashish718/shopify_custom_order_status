@@ -31,7 +31,7 @@ let saveOrders = async(Object, shop)=>{
 let itemData = await shopifyTagData(Object, shop)
 
   if (itemData.length>0) {
-    let data = await orderSchema.find({"shop":request.params.shop, "order.orderId":request.body.name})
+    let data = await orderSchema.find({"shop":shop.toString(), "order.orderId":Object.name.toString()})
     if (data.length>0) {
       return "Duplicate Item";
     }
