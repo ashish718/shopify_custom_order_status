@@ -17,7 +17,7 @@ exports.CreateOrder = async (request, response) =>{
      if (topic==='orders/create') {
        console.log(request.body, "order create request body");
 
-       let data = await orderSchema.find({"shop":request.params.shop, "order.orderId":request.body.name})
+       let data = await orderSchema.find({"shop":request.params.shop.toString(), "order.orderId":request.body.name})
 
        if (data.length>0) {
 
