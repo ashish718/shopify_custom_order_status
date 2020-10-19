@@ -37,7 +37,7 @@ exports.CreateOrder = async (request, response) =>{
            //   response.send("something went wrong")
            // }
            console.log(savingToDb);
-           res.status(200).send(savingToDb)
+           response.status(200).send(savingToDb)
         }
        // let postData = await postOrder(request.body, shop)
        // console.log(postData, "post data response");
