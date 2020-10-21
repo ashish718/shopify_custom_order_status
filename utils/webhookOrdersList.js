@@ -37,12 +37,20 @@ let itemData = await shopifyTagData(Object, shop)
     }
     else {
       console.log(itemData, "itemData");
+
+      let phone_no = Object.billing_address.phone
+      if (/\s/.test(phone_no)) {
+        // It has any kind of whitespace
+        phone_no = phone_no.split(' ').join()
+      }
+
       //Object.line_items.forEach(async (item, i) => {
         let obj = await {
                     orderId:Object.name,
                     created_at:Object.created_at,
                     first_name: Object.customer.first_name,
                     last_name: Object.customer.last_name,
+                    phone_no,
                     item: itemData
                   };
 
