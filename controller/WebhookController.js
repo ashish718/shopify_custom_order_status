@@ -138,13 +138,13 @@ exports.updateOrderStatus = async(req, res)=>{
   //   }
   // })
 
-  await orderSchema.findOne({shop:req.params.shop, "order.orderId":req.body.orderId}, function(err, docs){
+  await orderSchema.findOne({shop:req.params.shop, "order.orderId":req.body.orderId}, async function(err, docs){
     if (err) {
       console.log(err);
       res.send(err)
     }
     else {
-      orderSchema.updateOne({"order.item.id": req.body.item.id}, {$set:{"order.item.$.status": req.body.status}}, function(err, data) {
+      orderSchema.updateOne({"order.item.id": req.body.item.id}, {$set:{"order.item.$.status": req.body.status}}, async function(err, data) {
         if (err) {
           console.log(err, "update err");
           res.send(err)
