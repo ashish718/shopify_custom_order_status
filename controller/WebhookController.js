@@ -2,7 +2,7 @@ let {saveOrders} = require('../utils/webhookOrdersList')
 let {matchOrderTags} = require('../utils/matchTag')
 let orderSchema = require('../model/orderSchema')
 let settingSchema = require('../model/settingSchema')
-
+let {sms} = require('../utils/test/test2')
 
 exports.CreateOrder = async (request, response) =>{
 
@@ -151,6 +151,8 @@ exports.updateOrderStatus = async(req, res)=>{
         }
         else {
           console.log(data);
+
+          let sendSms = await sms(docs[0], req.params.shop, data[0])
           res.send(data)
         }
       })
