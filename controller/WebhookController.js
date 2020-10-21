@@ -125,7 +125,7 @@ exports.showOrders = async(req, res)=>{
 
 
 exports.updateOrderStatus = async(req, res)=>{
-  // console.log(req.body);
+  console.log(req.body, "eq body is");
   // console.log(req.params.shop);
   // await orderSchema.findOneAndUpdate({_id:req.body.order._id}, {$set:{status:req.body.status}}, { new: true }, function(err, docs){
   //   if (err) {
