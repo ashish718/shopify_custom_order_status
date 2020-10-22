@@ -152,7 +152,7 @@ exports.updateOrderStatus = async(req, res)=>{
         else {
           console.log(data);
 
-          let sendSms = await sms(req.body, req.params.shop)
+          let sendSms = await sms(docs.order.phone_no, req.body, req.params.shop)
           res.send(data)
         }
       })

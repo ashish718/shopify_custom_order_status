@@ -2,7 +2,7 @@ let msg91 = require("msg91")("129310AeIewjfm5d19a1bb", "BEWELL", "ROUTE_NO" );
 
 
 
-module.exports.sms = async(obj, shop)=>{
+module.exports.sms = async(mobileNo, obj, shop)=>{
 // console.log(docs, "docs");
 // console.log(shop, "shop");
 // console.log(data, "data");
