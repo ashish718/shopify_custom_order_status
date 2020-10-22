@@ -125,7 +125,7 @@ exports.showOrders = async(req, res)=>{
 
 
 exports.updateOrderStatus = async(req, res)=>{
-  console.log(req.body, "eq body is");
+
   // console.log(req.params.shop);
   // await orderSchema.findOneAndUpdate({_id:req.body.order._id}, {$set:{status:req.body.status}}, { new: true }, function(err, docs){
   //   if (err) {
@@ -152,7 +152,7 @@ exports.updateOrderStatus = async(req, res)=>{
         else {
           console.log(data);
 
-          let sendSms = await sms(docs, req.params.shop, data)
+          let sendSms = await sms(req.body, req.params.shop)
           res.send(data)
         }
       })
